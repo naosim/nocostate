@@ -1,33 +1,96 @@
-export class LabelAndValue {
+export class Value {
   /** @type {string} */
   value;
-  /** @type {string?} */
+  /** @type {string} */
   label;
 
   /**
-   * 
    * @param {string} value 
    * @param {string?} label 
    */
   constructor(value, label) {
     this.value = value;
-    this.label = label;
+    this.label = label || value;
   }
 }
 
-class StateTransition {
-  event;
-  currentState;
-  nextState;
-  notifyEvents;
+export function value(value) {
+  return new Value(value, null);
 }
 
-class StateDef {
+export class StateTransition {
   /** @type {string} */
+  currentState;
+  /** @type {Event} */
+  event;
+  /** @type {string} */
+  nextState;
+  /** @type {string[]} */
+  notifyEvents;
+
+}
+
+export class EventType {
+  /** @type {string} */
+  value;
+  /**
+   * 
+   * @param {string} value 
+   */
+  constructor(value) {
+    this.value = value;
+  }
+
+  static invokeEvent = new EventType("invokeEvent")
+  static linkedEvent = new EventType("linkedEvent")
+
+}
+
+export class Event {
+  /** @type {EventType} */
+  eventType;
+  /** @type {string} */
+  fromDomain;
+  /** @type {string} */
+  domainState;
+  /** @type {Value} */
   name;
-  /** @type {LabelAndValue[]} */
+}
+
+export class Domain {
+  /** @type {Value} */
+  name;
+  /** @type {Value[]} */
   states;
 
-  transitionTable;
+  /** @type {Value[]} */
+  invokeEvents;
 
+  /**
+   * 
+   * @param {Value} name 
+   * @param {Value[]} states 
+   * @param {Value[]} invokeEvents 
+   */
+  constructor(name, states, invokeEvents) {
+  }
+}
+
+
+export class DomainEntity {
+  /** @type {string} */
+  id;
+  /** @type {string} */
+  parentId;
+}
+
+
+export class DomainRepository {
+  /**
+   * 
+   * @param {string} domainName 
+   * @returns {Domain}
+   */
+  find(domainName) {
+  }
 }
