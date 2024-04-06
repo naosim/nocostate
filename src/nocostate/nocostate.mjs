@@ -23,11 +23,19 @@ export class StateTransition {
   currentState;
   /** @type {Event} */
   event;
+  /** @type {StateTransitionOutput} */
+  output;
+}
+
+export class StateTransitionOutput {
   /** @type {string} */
   nextState;
   /** @type {string[]} */
   notifyEvents;
+}
 
+export class StateTransitions {
+  invoke(currentState, invokeEvent) {}
 }
 
 export class EventType {
@@ -65,6 +73,7 @@ export class Domain {
 
   /** @type {Value[]} */
   invokeEvents;
+
 
   /**
    * 
